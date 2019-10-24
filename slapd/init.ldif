@@ -1,0 +1,21 @@
+dn: dc=example,dc=com
+objectClass: dcObject
+objectClass: organization
+o: Example
+dc: example
+
+dn: ou=Users,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Users
+
+dn: ou=Credentials,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Credentials
+
+# guest, Users, example.com
+dn: uid=guest,ou=Users,dc=example,dc=com
+objectClass: account
+objectClass: simpleSecurityObject
+uid: guest
+description: Guest User
+userPassword: guest

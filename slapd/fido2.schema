@@ -1,0 +1,53 @@
+# LDAP Schema for FIDO2 Credential
+
+attributetype ( 1.3.6.1.4.1.34468.2.56.1.1
+        NAME 'fido2ID'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.34468.2.56.1.2
+        NAME 'fido2RawID'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.5
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.34468.2.56.1.3
+        NAME 'fido2PublicKey'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.5
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.34468.2.56.1.4
+        NAME 'fido2Counter'
+        EQUALITY integerMatch
+        ORDERING integerOrderingMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.34468.2.56.1.5
+        NAME 'fido2UserID'
+        EQUALITY uuidMatch
+        ORDERING uuidOrderingMatch
+        SYNTAX 1.3.6.1.1.16.1
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.34468.2.56.1.6
+        NAME 'fido2AAGUID'
+        EQUALITY octetStringMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.40
+        SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.34468.2.56.1.7
+        NAME 'fido2CredentialName'
+        EQUALITY caseExactMatch
+        ORDERING caseExactOrderingMatch
+        SUBSTR caseExactSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+        SINGLE-VALUE )
+
+objectclass ( 1.3.6.1.4.1.34468.2.56.2.1
+	NAME 'fido2Credential'
+	DESC 'objectClass for FIDO2 Credential'
+	SUP top STRUCTURAL
+	MUST ( fido2ID $ fido2RawID $ fido2PublicKey $
+	       fido2Counter $ fido2UserID )
+	MAY ( fido2AAGUID $ fido2CredentialName ))
