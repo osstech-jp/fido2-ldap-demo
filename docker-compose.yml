@@ -5,8 +5,8 @@ volumes:
     driver: local
 
 services:
-  slapd:
-    build: slapd
+  ldap:
+    build: ldap
     restart: always
     ports:
       - '127.0.0.1:389:389'
@@ -18,6 +18,6 @@ services:
     ports:
       - '443:5000'
     environment:
-      LDAP_SERVER: 'slapd'
+      LDAP_SERVER: 'ldap'
       RP_HOST: 'localhost'
 #      RP_HOST: 'demo.osstech.co.jp'
