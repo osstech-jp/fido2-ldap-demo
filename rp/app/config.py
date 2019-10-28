@@ -11,8 +11,10 @@ LDAP_USE_TLS = False
 LDAP_BINDDN = 'cn=Manager,dc=example,dc=com'
 LDAP_SECRET = 'secret'
 
-FIDO2_RP = os.environ.get("RP_HOST", "localhost")
-FIDO2_ATTESTATION="none"
-#FIDO2_ATTESTATION="direct"
-FIDO2_USER_VERIFICATION="discouraged"
-#FIDO2_USER_VERIFICATION="preferred"
+RP_LOGLEVEL = os.environ.get("RP_LOGLEVEL", "INFO")
+RP_HOST = os.environ.get("RP_HOST", "localhost")
+RP_NAME = os.environ.get("RP_NAME", "Demo RP")
+RP_ATTESTATION="none"
+#RP_ATTESTATION="direct"
+RP_USER_VERIFICATION="discouraged"
+#RP_USER_VERIFICATION="preferred"

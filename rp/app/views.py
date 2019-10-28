@@ -29,7 +29,7 @@ from fido2.client import ClientData
 from fido2.ctap2 import AttestationObject
 from fido2.ctap2 import AuthenticatorData
 
-server = Fido2Server(rp, attestation=app.config['FIDO2_ATTESTATION'])
+server = Fido2Server(rp, attestation=app.config['RP_ATTESTATION'])
 
 login_manager = LoginManager()
 login_manager.login_view =  "index"
@@ -80,7 +80,7 @@ def register_options():
     else:
         regident_key = False
     credentials = []
-    user_verification = app.config.get('FIDO2_USER_VERIFICATION', "discouraged")
+    user_verification = app.config.get('RP_USER_VERIFICATION', "discouraged")
     user_id = UUID(current_user.entryUUID).bytes
     registration_data, state = server.register_begin({
         'id': user_id,
@@ -136,7 +136,7 @@ def assertion_options():
         if not user:
             abort(404)
         credential_data = [credential.to_credential_data() for credential in user.credentials]
-        user_verification = app.config.get('FIDO2_USER_VERIFICATION', "discouraged")
+        user_verification = app.config.get('RP_USER_VERIFICATION', "discouraged")
         auth_data, state = server.authenticate_begin(credential_data,
                                                      user_verification=user_verification)
         session['state'] = state
@@ -172,6 +172,15 @@ def assertion_response():
         auth_data,
         signature
     )
+    # Checking signCount
+    if auth_data.counter > credential.counter:
+        # TODO: flask_ldapconn is not allow to store integer value
+        credential.counter = str(auth_data.counter)
+        credential.save()
+    else:
+        app.logger.warn('wrong counter: stored counter=%d but %d asserted',
+                        credential.counter, auth_data.counter)
+        abort(404)
     user = credential.user
     if not user:
         abort(404)
