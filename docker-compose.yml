@@ -1,0 +1,23 @@
+version: "3.0"
+
+volumes:
+  ldap-data:
+    driver: local
+
+services:
+  slapd:
+    build: slapd
+    restart: always
+    ports:
+      - '127.0.0.1:389:389'
+    volumes:
+      - ldap-data:/var/lib/ldap
+  rp:
+    build: rp
+    restart: always
+    ports:
+      - '443:5000'
+    environment:
+      LDAP_SERVER: 'slapd'
+      RP_HOST: 'localhost'
+#      RP_HOST: 'demo.osstech.co.jp'
