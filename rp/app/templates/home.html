@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Credential Registeration</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='spectre-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='spectre.min.css') }}">
+    <script src="{{ url_for('static', filename='cbor.js') }}"></script>
+    <script src="{{ url_for('static', filename='webauthn.js') }}"></script>
+  </head>
+  <body style="margin: 2%;">
+    </div>
+    <h1>Credential Registeration</h1>
+    <input class="btn btn-primary" type="submit"
+           value="Register credential" onclick="register_begin()" />
+    <input class="btn btn-primary" type="submit"
+           value="Register credential with resident key"
+           onclick="register_begin(true)" />
+    <input class="btn" type="submit"
+           value="Logout" onclick="location.href='/logout'" />
+    <h2>User Entry</h2>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>DN</td>
+          <td>{{ current_user.dn }}</td>
+        </tr>
+        <tr>
+          <td>uid</td>
+          <td>{{ current_user.uid }}</td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>{{ current_user.description }}</td>
+        </tr>
+        <tr>
+          <td>entryUUID</td>
+          <td>{{ current_user.entryUUID }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Credentials</h2>
+
+    {% for credential in credentials %}
+    <div class="columns col-oneline">
+
+        <button class="btn" onclick="remove_credential('{{ credential.id }}');">
+          <i class="icon icon-delete"></i>
+        </button>
+      <div class="accordion">
+        <input type="checkbox" id="accordion-{{ credential.id }}" name="accordion-checkbox" hidden>
+        <label class="accordion-header" for="accordion-{{ credential.id }}">
+        <i class="icon icon-arrow-right mr-1"></i>
+        <tt>{{ credential.id }}</tt>
+        </label>
+        <div class="accordion-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>DN</td>
+                <td><tt>{{ credential.dn }}</tt></td>
+              </tr>
+              <tr>
+                <td>Counter</td>
+                <td><tt>{{ credential.counter }}</tt></td>
+              </tr>
+              <tr>
+                <td>AAGUID</td>
+                <td><tt>{{ credential.aaguid | hexlify }}</tt></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </body>
+</html>

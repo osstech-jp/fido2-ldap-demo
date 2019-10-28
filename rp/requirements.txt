@@ -1,0 +1,5 @@
+Flask==1.1.1
+Flask-Login==0.4.1
+flask-ldapconn==0.10.0
+cbor2==4.0.1
+fido2==0.7.1
