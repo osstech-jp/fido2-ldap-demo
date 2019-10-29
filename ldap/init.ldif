@@ -19,3 +19,11 @@ objectClass: simpleSecurityObject
 uid: guest
 description: Guest User
 userPassword: guest
+
+# demo, Users, example.com
+dn: uid=demo,ou=Users,dc=example,dc=com
+objectClass: account
+objectClass: simpleSecurityObject
+uid: demo
+description: Demo User
+userPassword: demo
