@@ -9,12 +9,13 @@
     <script src="{{ url_for('static', filename='webauthn.js') }}"></script>
   </head>
   <body style="margin: 2%;">
-    <h1>FIDO2 Login Example</h1>
+    <h1>Login Page</h1>
     <hr />
     <h3>Login with Username and Password</h3>
+    <p>1. First, linking user accout and your authenticator. You can login with username/password: guest/guest</p>
     <form method="POST" action="{{ url_for('login_with_password') }}">
       <div class="columns col-oneline">
-        <div class="col-1">
+        <div class="col-2">
           <label class="form-label" for="username">Username: </label>
         </div>
         <div class="col">
@@ -22,7 +23,7 @@
         </div>
       </div>
       <div class="columns col-oneline">
-        <div class="col-1">
+        <div class="col-2">
           <label class="form-label" for="password">Password: </label>
         </div>
         <div class="col">
@@ -36,7 +37,7 @@
     <h3>Password-less Login</h3>
     <form onsubmit="return login_fido2_username()">
       <div class="columns col-oneline">
-        <div class="col-1">
+        <div class="col-2">
           <label class="form-label" for="username2">Username: </label>
         </div>
         <div class="col">
