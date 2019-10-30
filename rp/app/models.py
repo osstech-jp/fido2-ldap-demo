@@ -62,8 +62,8 @@ class User(ldap.Entry, UserMixin):
 class Credential(ldap.Entry):
     base_dn = 'ou=Credentials,dc=example,dc=com'
     object_classes = ['fido2Credential']
-    entry_rdn = ['fido2ID']
-    id = ldap.Attribute('fido2ID')
+    entry_rdn = ['fido2CredentialID']
+    id = ldap.Attribute('fido2CredentialID')
     raw_id = ldap.Attribute('fido2RawID')
     public_key = ldap.Attribute('fido2PublicKey')
     counter = ldap.Attribute('fido2SignCount')
