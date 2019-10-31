@@ -2,7 +2,7 @@
 
 attributetype ( 1.3.6.1.4.1.34468.2.56.1.1
         NAME 'fido2CredentialID'
-        EQUALITY caseIgnoreIA5Match
+        EQUALITY caseExactIA5Match
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
         SINGLE-VALUE )
 
