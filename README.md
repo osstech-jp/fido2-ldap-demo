@@ -6,6 +6,23 @@
 $ docker-compose up --build
 ~~~
 
+You can access to https://localhost/
+
+If you want to use another hostname.
+You need to set `RP_HOST` environment value that is used for `rp.origin`
+
+docker-compose.yml:
+
+~~~
+-       RP_HOST: 'localhost'
++       RP_HOST: 'HOSTNAME'
+~~~
+
+and put SSL certificates:
+
+- rp/certs/*HOSTNAME*/cert.pem
+- rp/certs/*HOSTNAME*/key.pem
+
 ## ldapsearch
 
 ~~~
