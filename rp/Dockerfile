@@ -12,8 +12,8 @@ ENV PATH ./venv/bin:$PATH
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
 COPY app/ ./app
-COPY run.sh uwsgi.ini ./
+COPY uwsgi.ini ./
 COPY certs/ ./certs/
 
 EXPOSE 8443
-CMD ["./run.sh"]
+CMD ["uwsgi", "uwsgi.ini"]
