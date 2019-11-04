@@ -8,8 +8,9 @@ RUN apt-get update -qq && \
 RUN mkdir -p /rp
 WORKDIR /rp
 RUN virtualenv -p /usr/bin/python3 venv
+ENV PATH ./venv/bin:$PATH
 COPY requirements.txt ./
-RUN ./venv/bin/pip install -r requirements.txt
+RUN pip install -r requirements.txt
 COPY app/ ./app
 COPY run.sh uwsgi.ini ./
 COPY certs/ ./certs/
