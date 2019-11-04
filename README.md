@@ -9,7 +9,7 @@ $ docker-compose up --build
 You can access to https://localhost/
 
 If you want to use another hostname.
-You need to set `RP_HOST` environment value that is used for `rp.origin`
+You need to set `RP_HOST` environment value that is also used for FIDO2 `rp.origin`
 
 docker-compose.yml:
 
