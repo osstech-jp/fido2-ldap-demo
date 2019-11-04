@@ -16,7 +16,7 @@ services:
     build: rp
     restart: always
     ports:
-      - '443:5000'
+      - '443:8443'
     environment:
       LDAP_SERVER: 'ldap'
       RP_HOST: 'localhost'

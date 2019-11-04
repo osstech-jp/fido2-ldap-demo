@@ -1,12 +1,18 @@
-FROM python:3.7-slim-buster
+FROM debian:buster-slim
+
+RUN apt-get update -qq && \
+  apt-get install -y --no-install-recommends \
+  python3 virtualenv python3-virtualenv \
+  uwsgi uwsgi-plugin-python3
 
 RUN mkdir -p /rp
 WORKDIR /rp
+RUN virtualenv -p /usr/bin/python3 venv
 COPY requirements.txt ./
-RUN pip install -r requirements.txt
+RUN ./venv/bin/pip install -r requirements.txt
 COPY app/ ./app
-COPY run.sh ./
+COPY run.sh uwsgi.ini ./
 COPY certs/ ./certs/
 
-EXPOSE 5000
+EXPOSE 8443
 CMD ["./run.sh"]

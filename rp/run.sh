@@ -6,5 +6,5 @@ set -x
 export FLASK_RUN_CERT=certs/${RP_HOST}/cert.pem
 export FLASK_RUN_KEY=certs/${RP_HOST}/key.pem
 
-exec flask run --host 0.0.0.0
+exec uwsgi uwsgi.ini
 
