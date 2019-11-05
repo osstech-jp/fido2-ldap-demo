@@ -82,6 +82,10 @@ def register_options():
     credentials = []
     user_verification = app.config.get('RP_USER_VERIFICATION', "discouraged")
     user_id = UUID(current_user.entryUUID).bytes
+    if current_user.description:
+        displayName = current_user.description
+    else:
+        displayName = current_user.uid
     registration_data, state = server.register_begin({
         'id': user_id,
         'name': current_user.uid,
