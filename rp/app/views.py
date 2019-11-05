@@ -89,7 +89,7 @@ def register_options():
     registration_data, state = server.register_begin({
         'id': user_id,
         'name': current_user.uid,
-        'displayName': current_user.description,
+        'displayName': displayName,
         'icon': 'https://example.com/'
     }, credentials, user_verification=user_verification,
     resident_key=resident_key)
